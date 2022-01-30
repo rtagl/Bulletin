@@ -1,8 +1,16 @@
+import { useCollection } from '../../hooks/useCollection';
+import ProjectList from '../../components/ProjectList';
+
 // styles
 import './Dashboard.css';
 
-import React from 'react';
-
-export default function dashboard() {
-  return <div>Dashboard</div>;
+export default function Dashboard() {
+  const { documents, error } = useCollection('projects');
+  return (
+    <div>
+      <h2 className="page-title">Projects</h2>
+      {error && <p className="error">{error}</p>}
+      {documents && <ProjectList projects={documents} />}
+    </div>
+  );
 }
